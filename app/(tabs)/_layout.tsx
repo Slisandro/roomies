@@ -1,17 +1,22 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { Tabs } from 'expo-router';
+import React from 'react';
+import { useColorScheme } from 'react-native';
 
+import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../constants/Colors';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  family: "AntDesign" | "FontAwesome"
+  name: React.ComponentProps<typeof FontAwesome | typeof AntDesign>['name'];
   color: string;
+  size?: number
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return props.family === "FontAwesome" ? <FontAwesome size={props.size || 28} style={{ marginTop: 2 }} {...props} /> :
+    <AntDesign size={props.size || 28} style={{ marginTop: 2 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -20,34 +25,40 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        // color of icons active 
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon family="FontAwesome" name="home" size={26} color={color} />,
+          tabBarLabel: () => null,
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon family="FontAwesome" name="location-arrow" size={24} color={color} />,
+          tabBarLabel: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="three"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon family={"AntDesign"} name="message1" size={22} color={color} />,
+          tabBarLabel: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="four"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon family={"AntDesign"} name="staro" size={24} color={color} />,
+          tabBarLabel: () => null,
         }}
       />
     </Tabs>
