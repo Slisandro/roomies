@@ -2,7 +2,9 @@ import { useNavigation } from 'expo-router';
 import React from 'react';
 import { Button, StyleSheet, TextInput } from 'react-native';
 import { View, Text } from '../../components/Themed';
-import app from '@react-native-firebase/app';
+import auth from '../../firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function TabLayout() {
   const [email, setEmail] = React.useState<string>("");
@@ -10,19 +12,17 @@ export default function TabLayout() {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    // auth()
-    //   .signInWithEmailAndPassword(email, password)
-    //   // @ts-expect-error
-    //   .then(() => navigation.navigate('(tabs)'))
-    //   .catch(error => alert(JSON.stringify(error)))
-  }
-  // const onPress = () => {
-  //   // @ts-expect-error
-  //   navigation.navigate('/(tabs)');
-  // };
+    signInWithEmailAndPassword(auth, email, password)
+      // @ts-expect-error
+      .then(() => navigation.navigate('(tabs)'))
+      .catch(error => alert(JSON.stringify(error)))
+  };
+
+  const handleRegister = () => null //navigation.navigate('(auth)/register.tsx')
+
   return (
     <View style={styles.container}>
-      <Text style={{ color: '#e93766', fontSize: 40 }}>Login</Text>
+      <Text style={{ fontSize: 40 }}>Roomies</Text>
       <TextInput
         placeholder="Email"
         autoCapitalize="none"
@@ -38,7 +38,11 @@ export default function TabLayout() {
         onChangeText={(p: string) => setPassword(p)}
         value={password}
       />
-      <Button title="Login" color="#e93766" onPress={handleLogin} />
+      <Button title="Login" onPress={handleLogin} />
+      <Text onPress={handleRegister} style={styles.register}>
+        Already have an account?
+      </Text>
+      <TouchableOpacity style={styles.registerButton}>Register</TouchableOpacity>
     </View>
   );
 }
@@ -63,8 +67,17 @@ const styles = StyleSheet.create({
     borderColor: "black",
     padding: 10,
     borderRadius: 10,
-    fontSize: 15
+    fontSize: 15,
   },
+  button: {
+    borderWidth: 2,
+    borderColor: "black",
+    padding: 10,
+    borderRadius: 10,
+    fontSize: 15,
+  },
+  register: { color: '#000000', fontSize: 18, justifyContent: "center", alignItems: "center", paddingTop: 10 },
+  registerButton: { fontWeight: "600", fontSize: 19, color: "#ff00ff", paddingRight: 5 },
   textInput: {
     height: 40,
     fontSize: 20,
