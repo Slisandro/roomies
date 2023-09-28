@@ -1,80 +1,63 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-
-import auth from '@react-native-firebase/auth';
-import { TextInput, Button } from 'react-native';
-import { Text, View } from '../../components/Themed';
 import { useNavigation } from 'expo-router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import React from 'react';
+import { Button, StyleSheet, TextInput } from 'react-native';
+import { Text, View } from '../../components/Themed';
+import auth from '../../firebase/auth';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function LoginScreen() {
-  const navigation = useNavigation();
-  const [initializing, setInitializing] = React.useState(true);
-  const [user, setUser] = React.useState();
+export default function TabLayout() {
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const navigation = useNavigation();
 
-  // Handle user state changes
-  // function onAuthStateChanged(user) {
-  //   setUser(user);
-  //   if (initializing) setInitializing(false);
-  // }
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      // @ts-expect-error
+      .then(() => navigation.navigate('(tabs)'))
+      .catch(error => alert(JSON.stringify(error)))
+  };
 
-  // React.useEffect(() => {
-  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-  //   return subscriber; // unsubscribe on unmount
-  // }, []);
-
-  if (initializing) return null;
-
-  // const onPress = () => {
-  //   // @ts-expect-error
-  //   navigation.navigate('/(tabs)');
-  // };
-
-  if (!user) {
-    return (
-      <View>
-        <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={(e: string) => setEmail(e)}
-          value={email}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Password"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={(p: string) => setPassword(p)}
-          value={password}
-        />
-        <Button title="Login" color="#e93766" />
-      </View>
-    );
-  }
+  // @ts-expect-error
+  const handleRegister = () => navigation.navigate('register')
 
   return (
-    <View>
-      <Text>Welcome {JSON.stringify(user)}</Text>
+    <View style={styles.container}>
+      <Text style={{ fontSize: 40 }}>Roomies</Text>
+      <Text style={{ fontSize: 25 }}>Login</Text>
+      <TextInput
+        placeholder="Email"
+        autoCapitalize="none"
+        style={styles.textInput}
+        onChangeText={(e: string) => setEmail(e)}
+        value={email}
+      />
+      <TextInput
+        secureTextEntry
+        placeholder="Password"
+        autoCapitalize="none"
+        style={styles.textInput}
+        onChangeText={(p: string) => setPassword(p)}
+        value={password}
+      />
+      <TouchableOpacity onPress={handleLogin} style={styles.login}>
+        <Text style={{ fontSize: 19 }}>Login</Text>
+      </TouchableOpacity>
+      <Text style={styles.register}>
+        Already have an account?
+        <TouchableOpacity onPress={handleRegister} style={styles.registerButton}>
+          <Text style={{ fontWeight: "500", fontSize: 19 }}>Register</Text>
+        </TouchableOpacity>
+      </Text>
     </View>
   );
-
-  // return (
-  //   <View style={styles.container}>
-  //     <TouchableOpacity onPress={onPress}>
-  //       <Text style={styles.login}>Login</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
@@ -90,7 +73,23 @@ const styles = StyleSheet.create({
     borderColor: "black",
     padding: 10,
     borderRadius: 10,
-    fontSize: 15
+    fontSize: 15,
+  },
+  button: {
+    borderWidth: 2,
+    borderColor: "black",
+    padding: 10,
+    borderRadius: 10,
+    fontSize: 15,
+  },
+  register: {
+    color: '#000000',
+    fontSize: 18,
+    marginTop: 15
+    // height: 60,
+    // padding: 10
+  },
+  registerButton: {
   },
   textInput: {
     height: 40,
