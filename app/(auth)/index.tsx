@@ -19,7 +19,10 @@ export default function TabLayout() {
   };
 
   // @ts-expect-error
-  const handleRegister = () => navigation.navigate('register')
+  const handleRegister = () => navigation.navigate('register');
+  
+  // @ts-expect-error
+  const handleResetPassword = () => navigation.navigate('reset-password');
 
   return (
     <View style={styles.container}>
@@ -40,6 +43,7 @@ export default function TabLayout() {
         onChangeText={(p: string) => setPassword(p)}
         value={password}
       />
+      <TouchableOpacity onPress={handleResetPassword} style={styles.registerButton}><Text style={{ textAlign: "right" }}>Reset password</Text></TouchableOpacity>
       <TouchableOpacity onPress={handleLogin} style={styles.login}>
         <Text style={{ fontSize: 19 }}>Login</Text>
       </TouchableOpacity>
