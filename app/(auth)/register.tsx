@@ -1,22 +1,33 @@
+import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from 'expo-router';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
-import { Button, StyleSheet, TextInput } from 'react-native';
-import { Text, View } from '../../components/Themed';
-import auth from '../../firebase/auth';
+import { Image, StyleSheet, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View } from '../../components/Themed';
+import { serviceRegister } from '../../services/auth';
 
 export default function TabLayout() {
+    const [image, setImage] = React.useState(null);
     const [name, setName] = React.useState<string>("");
     const [email, setEmail] = React.useState<string>("");
     const [password, setPassword] = React.useState<string>("");
     const navigation = useNavigation();
 
     const handleRegister = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            // @ts-expect-error
-            .then(() => navigation.navigate('(tabs)'))
-            .catch(error => alert(JSON.stringify(error)))
+        serviceRegister(name, email, password);
+    };
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
     };
 
     // @ts-expect-error
@@ -25,7 +36,13 @@ export default function TabLayout() {
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 40 }}>Roomies</Text>
-            <Text style={{ fontSize: 25 }}>Create account</Text>
+            <Text style={{ fontSize: 25, margin: 15 }}>Create account</Text>
+            <TouchableOpacity onPress={pickImage}>
+                <Image 
+                    source={{ uri: image }} 
+                    style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "#fff", padding: 1 }} 
+                />
+            </TouchableOpacity>
             <TextInput
                 placeholder="Name"
                 autoCapitalize="none"
