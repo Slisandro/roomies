@@ -1,10 +1,9 @@
 import { useNavigation } from 'expo-router';
-import { sendPasswordResetEmail } from 'firebase/auth';
 import React from 'react';
-import { Button, StyleSheet, TextInput } from 'react-native';
-import { Text, View } from '../../components/Themed';
-import auth from '../../firebase/auth';
+import { StyleSheet, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View } from '../../components/Themed';
+import { serviceResetPassword } from '../../services/auth';
 
 export default function ResetPasswordLayout() {
     const [email, setEmail] = React.useState<string>("");
@@ -12,9 +11,9 @@ export default function ResetPasswordLayout() {
     const navigation = useNavigation();
 
     const handleRegister = () => {
-        sendPasswordResetEmail(auth, email)
-            .then(() => alert("Email enviado"))
-            .catch(error => alert(JSON.stringify(error)))
+        serviceResetPassword(email);
+        // .then(() => alert("Email enviado"))
+        // .catch(error => alert(JSON.stringify(error)))
     };
 
     // @ts-expect-error
@@ -24,13 +23,6 @@ export default function ResetPasswordLayout() {
         <View style={styles.container}>
             <Text style={{ fontSize: 40 }}>Roomies</Text>
             <Text style={{ fontSize: 25 }}>Create account</Text>
-            {/* <TextInput
-                placeholder="Name"
-                autoCapitalize="none"
-                style={styles.textInput}
-                onChangeText={(e: string) => setName(e)}
-                value={name}
-            /> */}
             <TextInput
                 placeholder="Email"
                 autoCapitalize="none"
@@ -39,10 +31,11 @@ export default function ResetPasswordLayout() {
                 value={email}
             />
             <TouchableOpacity onPress={handleRegister} style={styles.register}>
-                <Text>Register</Text>
+                <Text>Send Email</Text>
             </TouchableOpacity>
             <TextInput
                 placeholder="Validate Code"
+                editable={false}
                 autoCapitalize="none"
                 style={styles.textInput}
                 onChangeText={(p: string) => setCode(p)}
