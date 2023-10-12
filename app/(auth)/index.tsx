@@ -1,31 +1,27 @@
 import { useNavigation } from 'expo-router';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
-import { Button, StyleSheet, TextInput } from 'react-native';
-import { Text, View } from '../../components/Themed';
-import auth from '../../firebase/auth';
+import { StyleSheet, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Container, { Toast } from 'toastify-react-native';
+import { Text, View } from '../../components/Themed';
+import { serviceLogin } from '../../services/auth';
 
 export default function TabLayout() {
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      // @ts-expect-error
-      .then(() => navigation.navigate('(tabs)'))
-      .catch(error => alert(JSON.stringify(error)))
-  };
+  const handleLogin = async () => await serviceLogin(email, password);
 
   // @ts-expect-error
   const handleRegister = () => navigation.navigate('register');
-  
+
   // @ts-expect-error
   const handleResetPassword = () => navigation.navigate('reset-password');
 
   return (
     <View style={styles.container}>
+      <Container position="top" />
       <Text style={{ fontSize: 40 }}>Roomies</Text>
       <Text style={{ fontSize: 25 }}>Login</Text>
       <TextInput
@@ -62,6 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: "#fff"
   },
   title: {
     fontSize: 20,
@@ -90,8 +87,6 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
     marginTop: 15
-    // height: 60,
-    // padding: 10
   },
   registerButton: {
   },
@@ -99,6 +94,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 20,
     width: '90%',
+    color: "#000",
     borderColor: '#9b9b9b',
     borderBottomWidth: 1,
     marginTop: 8,
