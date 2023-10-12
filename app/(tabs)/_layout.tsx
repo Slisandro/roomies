@@ -15,7 +15,9 @@ function TabBarIcon(props: {
   color: string;
   size?: number
 }) {
+  // @ts-expect-error
   return props.family === "FontAwesome" ? <FontAwesome size={props.size || 28} style={{ marginTop: 2 }} {...props} /> :
+    // @ts-expect-error
     <AntDesign size={props.size || 28} style={{ marginTop: 2 }} {...props} />;
 }
 
@@ -49,15 +51,15 @@ export default function TabLayout() {
         name="three"
         options={{
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon family={"AntDesign"} name="message1" size={22} color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon family={"AntDesign"} name="staro" size={24} color={color} />,
           tabBarLabel: () => null,
         }}
       />
       <Tabs.Screen
-        name="four"
+        name="(four)"
         options={{
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon family={"AntDesign"} name="staro" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon family={"AntDesign"} name="message1" size={22} color={color} />,
           tabBarLabel: () => null,
         }}
       />
