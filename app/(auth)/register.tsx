@@ -118,7 +118,7 @@ export default function TabLayout() {
                 <Text style={styles.login}>
                     Already have an account?
                 </Text>
-                <TouchableOpacity onPress={handleRegister} style={styles.loginBtn}>
+                <TouchableOpacity onPress={handleLogin} style={styles.loginBtn}>
                     <Text style={styles.loginLabel}>Login</Text>
                 </TouchableOpacity>
             </View>
