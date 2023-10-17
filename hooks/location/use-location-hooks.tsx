@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import * as Location from 'expo-location';
 import { calculateRegion } from "../../utils/calculate-region";
 
-
 export default function useLocation() {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
