@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Container from 'toastify-react-native';
-import Icon from '../../components/Icon';
+import Icon from '../../components/icon-component';
 import { Text, View } from '../../components/Themed';
 import { ResponseService, serviceLogin } from '../../services/auth';
 

@@ -4,7 +4,7 @@ import { StyleSheet, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, View } from '../../components/Themed';
 import { serviceResetPassword } from '../../services/auth';
-import Icon from '../../components/Icon';
+import Icon from '../../components/icon-component';
 import Container from 'toastify-react-native';
 
 export default function ResetPasswordLayout() {
