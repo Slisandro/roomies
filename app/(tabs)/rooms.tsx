@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import { Text, View } from '../../components/Themed';
+import FlatListRoomsComponent from '../../components/flat-list-rooms-component';
+import MarkerRoomsComponent from '../../components/marker-rooms-component';
 import SearchBarMapComponent from '../../components/search-bar-map-component';
 import useLocation from '../../hooks/location/use-location-hooks';
 import useGetRooms from '../../hooks/rooms/use-get-rooms-hooks';
-import { calculateRegion } from '../../utils/calculate-region';
-import MarkerRoomsComponent from '../../components/marker-rooms-component';
 
 export default function TabTwoScreen() {
   const { errorMsg, location } = useLocation();
   const { rooms } = useGetRooms();
+  const [roomSelect, setRoomSelect] = useState(location);
+
+  const onPressRoom = (lat: number, lon: number) => setRoomSelect({latitudeDelta: 0.085, longitudeDelta: 0.05, longitude: lon, latitude: lat });
 
   // error access location 
   if (errorMsg) {
@@ -19,14 +22,14 @@ export default function TabTwoScreen() {
         <Text>{errorMsg}</Text>
       </View>
     )
-  }
+  };
 
   // loading location
   if (!location) return (
     <View style={styles.container}>
       <Text>Loading...</Text>
     </View>
-  )
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,11 +37,12 @@ export default function TabTwoScreen() {
       <MapView
         style={styles.map}
         loadingEnabled={true}
-        initialRegion={calculateRegion(location)}
+        initialRegion={location}
+        region={roomSelect}
         userInterfaceStyle={"dark"}
       >
         {rooms.map((p, i) => <MarkerRoomsComponent room={p} key={p.id} />)}
-        <Marker
+        {/* <Marker
           coordinate={{
             latitude: location.latitude,
             longitude: location.longitude,
@@ -46,8 +50,9 @@ export default function TabTwoScreen() {
           image={{
             uri: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-50.png",
           }}
-        />
+        /> */}
       </MapView>
+      <FlatListRoomsComponent rooms={rooms} onPressRoom={onPressRoom} location={location} />
     </SafeAreaView>
   );
 }
