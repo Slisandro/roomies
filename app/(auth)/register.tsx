@@ -5,7 +5,7 @@ import { Image, StyleSheet, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, View } from '../../components/Themed';
 import { serviceRegister } from '../../services/auth';
-import Icon from '../../components/Icon';
+import Icon from '../../components/icon-component';
 import Container from 'toastify-react-native';
 
 // const DEFAULTIMAGE = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
@@ -118,7 +118,7 @@ export default function TabLayout() {
                 <Text style={styles.login}>
                     Already have an account?
                 </Text>
-                <TouchableOpacity onPress={handleRegister} style={styles.loginBtn}>
+                <TouchableOpacity onPress={handleLogin} style={styles.loginBtn}>
                     <Text style={styles.loginLabel}>Login</Text>
                 </TouchableOpacity>
             </View>
