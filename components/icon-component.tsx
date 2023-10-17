@@ -3,7 +3,7 @@ import React from "react";
 import { StyleProp, TextStyle } from "react-native";
 import { GestureResponderEvent } from "react-native";
 
-export default function Icon(props: {
+export default function IconComponent(props: {
     family: "AntDesign" | "FontAwesome" | "MaterialCommunityIcons" | "EvilIcons" | "MaterialIcons" | "Ionicons"
     name: React.ComponentProps<typeof FontAwesome | typeof AntDesign | typeof MaterialCommunityIcons | typeof EvilIcons | typeof Ionicons>['name'];
     color: string;
@@ -21,6 +21,4 @@ export default function Icon(props: {
                 : props.family === "MaterialCommunityIcons" ? <MaterialCommunityIcons onPress={props.onPress} size={props.size || 28} {...props} />
                     // @ts-expect-error
                     : <Ionicons onPress={props.onPress} size={props.size || 28} {...props} />;
-}
-
-// { marginTop: 2 }
+};
