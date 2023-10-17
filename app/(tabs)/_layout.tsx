@@ -24,7 +24,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="rooms"
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => <Icon family="FontAwesome" name="location-arrow" size={24} color={color} />,
