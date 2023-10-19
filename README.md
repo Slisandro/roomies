@@ -7,6 +7,7 @@
 
 <br  />
 
+
 <div  align="center">
 
 <a align="center" href="https://github.com/Slisandro/roomies">
@@ -40,18 +41,18 @@
 </div>
 
 ## About The Project
+<div align="center">
+<video align="center" width="100%" height="auto" src="https://github-production-user-asset-6210df.s3.amazonaws.com/47686025/276438063-414a4892-a6cc-463b-ad62-9978ba4a553a.mp4" autoplay></video>
+	
+</div>
 
-[![Product Name Screen Shot][product-screenshot]]
+Roomies is a room rental app developed with `Expo` in `React Native`. 
 
-The goal of this project was to improve my programming skills by creating a simple `single-page application (SPA)`. 
+Users can search for properties near them using `Google Maps` and `Geolocation`. 
 
-The application uses an external API to consume resources and display them on the screen. 
+The app's authentication and database are also developed in `Firebase Authentication` and `Firestore`.
 
-Thanks to `Axios`, I can easily consume the `API` through `HTTP requests`. 
-
-On the frontend, I created custom hooks to improve the performance of the app. 
-
-With the help of the `Zustand` library as a global state manager, I was able to store the user's favorite cities.
+Actually, the app is in progress.
 
 ## Built With
 
@@ -162,7 +163,7 @@ Project Link: [https://github.com/slisandro/roomies](https://github.com/Slisandr
 
 [linkedin-url]: https://www.linkedin.com/in/salvareschilisandro
 
-[product-screenshot]: https://youtube.com/watch?v=NfjgcS-vojA
+[product-screenshot]: https://github-production-user-asset-6210df.s3.amazonaws.com/47686025/276438063-414a4892-a6cc-463b-ad62-9978ba4a553a.mp4
 
 [ReactNative]: https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
 [Expo]: https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37
