@@ -1,7 +1,7 @@
 import { useNavigation } from 'expo-router';
 import React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import Container from 'toastify-react-native';
 import Icon from '../../components/icon-component';
 import { Text, View } from '../../components/Themed';
