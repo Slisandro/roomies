@@ -1,9 +1,9 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, View } from 'react-native';
-import useLocation from '../hooks/location/use-location-hooks';
+import { TouchableOpacity, View } from 'react-native';
 import { RoomPost } from '../models/post-room-model';
 import { distanceTwoPoints } from '../utils/distance-two-points';
-import ItemFlatListComponent from './item-flat-list-component';
+import ItemRoomFlatListComponent from './item-room-flat-list-component';
+import FlatListComponent from './flat-list-component';
 
 function FlatListRoomsComponent(
     { rooms, onPressRoom, location } :
@@ -14,7 +14,7 @@ function FlatListRoomsComponent(
         }
 ) {
     return (
-        <FlatList
+        <FlatListComponent
             data={rooms}
             renderItem={({ item }) => {
                 const distance = distanceTwoPoints({
@@ -26,7 +26,7 @@ function FlatListRoomsComponent(
                 }).toFixed(1);
                 return (
                     <TouchableOpacity onPress={() => onPressRoom(item.lat, item.lon)}>
-                        <ItemFlatListComponent item={item} distance={distance} />
+                        <ItemRoomFlatListComponent item={item} distance={distance} />
                     </TouchableOpacity>
                 )
             }}
