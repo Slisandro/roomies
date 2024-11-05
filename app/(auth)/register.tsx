@@ -1,8 +1,8 @@
 // import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, TextInput } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, View } from '../../components/Themed';
 import { serviceRegister } from '../../services/auth';
 import Icon from '../../components/icon-component';
