@@ -42,7 +42,7 @@
 
 ## About The Project
 <div align="center">
-<video align="center" width="100%" height="auto" src="https://github-production-user-asset-6210df.s3.amazonaws.com/47686025/276438063-414a4892-a6cc-463b-ad62-9978ba4a553a.mp4" autoplay></video>
+<video align="center" width="100%" height="auto" src="https://github.com/user-attachments/assets/09e714c2-fe63-42c6-8bf2-359efa594fcf" autoplay></video>
 	
 </div>
 
